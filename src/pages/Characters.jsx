@@ -5,7 +5,7 @@ function Chatacters() {
         <div className="item">
           <img className="itemImgProfile" src="./" alt="img" />
           <div className="itemInfo">
-            <h3 className="itemName">Pidor</h3>
+            <h3 className="itemName"> ahs</h3>
             <div className="itemStatus">Loh</div>
             <div className="itemSpecie">M</div>
           </div>
