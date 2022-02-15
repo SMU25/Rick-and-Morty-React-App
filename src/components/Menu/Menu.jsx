@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import style from "../Menu/Menu.module.scss";
 
 function Menu() {
@@ -8,10 +10,10 @@ function Menu() {
       </div> */}
       <ul className={style.menuList}>
         <li className={style.menuItem}>
-          <a href="#/Home">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className={style.menuItem}>
-          <a href="#/Characters">Characters</a>
+          <Link to="/Characters">Characters</Link>
         </li>
       </ul>
     </div>

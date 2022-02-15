@@ -1,3 +1,5 @@
+import { Route, Routes } from "react-router-dom";
+
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
 
@@ -11,8 +13,10 @@ function App() {
       <div className="wrapper">
         <Menu />
         <div className="content">
-          <Chatacters />
-          {/* <Home /> */}
+          <Routes>
+            <Route path="/" element={<Home />} exact></Route>
+            <Route path="/characters" element={<Chatacters />} exact></Route>
+          </Routes>
         </div>
       </div>
     </div>
