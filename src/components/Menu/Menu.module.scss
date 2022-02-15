@@ -1,0 +1,59 @@
+.menu {
+  width: 25%;
+  height: 90vh;
+  background-color: rgba(87, 87, 87, 0.137);
+  left: 0;
+
+  &List {
+    margin: 20px 0 0 30px;
+  }
+  &Item {
+    margin-bottom: 10px;
+
+    a {
+      font-size: 24px;
+      color: rgb(78, 76, 76);
+      font-weight: 500;
+
+      &:hover {
+        color: #000;
+        font-weight: 600;
+      }
+    }
+  }
+
+  // &Btn {
+  //   width: 48px;
+  //   height: 48px;
+  //   position: relative;
+  //   cursor: pointer;
+
+  //   &:hover {
+  //     background-color: rgba(8, 160, 84, 0.548);
+  //     border-radius: 50%;
+  //   }
+
+  //   span,
+  //   ::before,
+  //   ::after {
+  //     height: 2.5px;
+  //     width: 24px;
+  //     background-color: rgb(24, 23, 23);
+  //     position: absolute;
+  //   }
+  //   ::before,
+  //   ::after {
+  //     content: "";
+  //   }
+  //   span {
+  //     top: 50%;
+  //     left: 25%;
+  //   }
+  //   ::before {
+  //     bottom: 9px;
+  //   }
+  //   ::after {
+  //     top: 9px;
+  //   }
+  // }
+}
