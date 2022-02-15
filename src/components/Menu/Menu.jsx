@@ -8,11 +8,11 @@ function Menu() {
       {/* <div className={style.menuBtn}>
         <span></span>
       </div> */}
-      <ul className={style.menuList}>
-        <li className={style.menuItem}>
+      <ul className={style.menu__list}>
+        <li className={style["menu__list-item"]}>
           <Link to="/">Home</Link>
         </li>
-        <li className={style.menuItem}>
+        <li className={style["menu__list-item"]}>
           <Link to="/Characters">Characters</Link>
         </li>
       </ul>

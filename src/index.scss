@@ -7,7 +7,7 @@
 .container {
   // margin: 0 auto;
   min-width: 320px;
-  max-width: 100%;
+  // max-width: 1920px;
 }
 .title {
   font-weight: 600;
@@ -16,17 +16,18 @@
   display: flex;
 }
 .content {
-  width: 70%;
+  max-width: 75%;
+  overflow: hidden;
 }
 
 .home {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  &Title {
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__title {
     margin: 50px 0 80px;
     font-size: 54px;
-    margin-left: 10px;
   }
   .start {
     background-color: rgb(212, 139, 42);
@@ -53,12 +54,48 @@
 }
 
 .characters {
-  .items {
+  &__items {
+    padding: 30px 20px 70px;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
   }
-  .item {
-    width: 17.5%;
+  &__item {
+    max-width: 222px;
+    margin: 0 10px;
+    overflow: hidden;
+
+    &-avatar {
+      max-width: 100%;
+      border-radius: 50%;
+    }
+    &-info {
+      text-align: center;
+      padding: 10px 20px 50px;
+    }
+    &-name {
+    }
+    &-status {
+    }
+    &-species {
+    }
+  }
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .page-number,
+  .button-prev-page,
+  .button-next-page {
+    padding: 0 5px;
+    font-size: 22px;
+  }
+  .page-number {
+    &:hover {
+      color: rgb(150, 40, 40);
+    }
+  }
+  .button-prev-page,
+  .button-next-page {
   }
 }
