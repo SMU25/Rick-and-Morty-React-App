@@ -16,15 +16,14 @@
   display: flex;
 }
 .content {
-  max-width: 75%;
+  width: 75%;
   overflow: hidden;
 }
 
 .home {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
+  max-width: 50%;
+  margin: 0 auto;
+  text-align: center;
   &__title {
     margin: 50px 0 80px;
     font-size: 54px;
@@ -55,9 +54,12 @@
 
 .characters {
   &__items {
-    padding: 30px 20px 70px;
+    // max-width: 1250px;
+    // margin: 0 auto; // поки не потрібно
     display: flex;
+    justify-content: space-evenly; // переробити
     flex-wrap: wrap;
+    padding: 30px 20px 70px;
   }
   &__item {
     max-width: 222px;
@@ -80,17 +82,24 @@
     }
   }
   &__pagination {
+  }
+  .pagination {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding: 0 20px 50px;
   }
   .page-number,
   .button-prev-page,
   .button-next-page {
     padding: 0 5px;
     font-size: 22px;
+    cursor: pointer;
   }
   .page-number {
+    padding: 0 5px;
+
     &:hover {
       color: rgb(150, 40, 40);
     }
