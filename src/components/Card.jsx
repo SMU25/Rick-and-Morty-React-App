@@ -6,7 +6,7 @@ function Card({ name, status, species, image }) {
         src={image}
         alt="img"
         title={`
-        Character: ${name} 
+        ${name} 
         Status: ${status}
         Species: ${species}`}
       />

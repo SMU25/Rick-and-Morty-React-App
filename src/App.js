@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
+import ModalWindow from "./components/ModalWindow";
 
 import Home from "./pages/Home";
-import Chatacters from "./pages/Characters";
+import Characters from "./pages/Characters";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -14,6 +15,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage, setCharactersPerPage] = useState(20);
+  const [openedModal, setOpenedModal] = useState(false);
+  const [textModal, setTextModal] = useState("");
   useEffect(() => {
     async function getCharacters() {
       try {
@@ -21,13 +24,13 @@ function App() {
           `https://rickandmortyapi.com/api/character/?page=${currentPage}`
         );
 
-        setInfo(data.info);
         setCharacters(data.results);
+        setInfo(data.info);
 
         setLoading(false);
       } catch (error) {
-        alert("Ошибка получения персонажей");
-        console.log(error);
+        setTextModal("Ошибка получения персонажей");
+        setOpenedModal(true);
       }
     }
     getCharacters();
@@ -51,6 +54,11 @@ function App() {
   };
   return (
     <div className="container">
+      <ModalWindow
+        opened={openedModal}
+        text={textModal}
+        setOpenedModal={setOpenedModal}
+      />
       <Header />
       <div className="wrapper">
         <Menu />
@@ -60,7 +68,7 @@ function App() {
             <Route
               path="/characters"
               element={
-                <Chatacters
+                <Characters
                   characters={currentCharacters}
                   loading={loading}
                   totalCharacters={info.count}

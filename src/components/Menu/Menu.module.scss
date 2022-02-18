@@ -1,8 +1,9 @@
 .menu {
-  width: 30%;
-  min-height: 90vh;
-  background-color: rgba(87, 87, 87, 0.137);
+  position: fixed;
   left: 0;
+  width: 30%;
+  height: 90vh;
+  background-color: rgba(87, 87, 87, 0.137);
 
   &__list {
     margin: 30px 50px 0 30px;

@@ -29,6 +29,11 @@ function Chatacters({
           nextPage={nextPage}
           paginate={paginate}
         />
+        <ul className="characters__numbers">
+          <li>10</li>
+          <li>20</li>
+          <li>50</li>
+        </ul>
       </div>
     </div>
   );

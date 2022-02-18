@@ -1,3 +1,6 @@
+import arrowLeft from "../assets/img/arrow-left.svg";
+import arrowRight from "../assets/img/arrow-right.svg";
+
 function Pagination({
   totalCharacters,
   charactersPerPage,
@@ -14,11 +17,11 @@ function Pagination({
   return (
     <ul className="pagination">
       <button onClick={prevPage} className="button-prev-page">
-        {"<"}
+        <img src={arrowLeft} alt="arrow-left" />
       </button>
       {pageNumbers.map((number) => (
         <li
-          className="page-number"
+          className="pagination__page-number"
           key={number}
           onClick={() => paginate(number)}
         >
@@ -27,7 +30,7 @@ function Pagination({
       ))}
 
       <button onClick={nextPage} className="button-next-page">
-        {">"}
+        <img src={arrowRight} alt="arrow-right" />
       </button>
     </ul>
   );
