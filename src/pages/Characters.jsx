@@ -1,23 +1,26 @@
+import React, { useState } from "react";
+
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 
-function Chatacters({
+function Characters({
   characters,
   loading,
   prevPage,
   nextPage,
   totalCharacters,
   charactersPerPage,
+  setCharactersPerPage,
   paginate,
+  setCurrentPage,
 }) {
-  function renderCharacters() {
-    return characters.map((item) => (
-      <Card key={item.id} id={item.id} {...item} />
+  const renderCharacters = () => {
+    return (loading ? [...Array(20)] : characters).map((item, index) => (
+      <Card key={index} id={index} loading={loading} {...item} />
     ));
-  }
-  if (loading) {
-    return <h5>loading...</h5>; //переробити на шось більш продвинуте
-  }
+  };
+  const [active, setActive] = useState(false);
+
   return (
     <div className="characters">
       <div className="characters__items">{renderCharacters()}</div>
@@ -29,14 +32,44 @@ function Chatacters({
           nextPage={nextPage}
           paginate={paginate}
         />
-        <ul className="characters__numbers">
-          <li>10</li>
-          <li>20</li>
-          <li>50</li>
+        <ul className="characters__select">
+          <div
+            className="characters__select-header"
+            onClick={() => {
+              setActive(!active);
+            }}
+          >
+            <div
+              className="characters__select-current"
+              value={charactersPerPage}
+            >
+              {charactersPerPage}
+            </div>
+          </div>
+          <div
+            className={`characters__select-body ${
+              active ? "characters__select-body--active" : ""
+            }`}
+          >
+            <li
+              className="characters__select-number"
+              onClick={() => setCharactersPerPage(10)}
+              value={10}
+            >
+              10
+            </li>
+            <li
+              className="characters__select-number"
+              onClick={() => setCharactersPerPage(10)}
+              value={20}
+            >
+              20
+            </li>
+          </div>
         </ul>
       </div>
     </div>
   );
 }
 
-export default Chatacters;
+export default Characters;

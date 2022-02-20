@@ -9,14 +9,13 @@ function Pagination({
   prevPage,
   nextPage,
 }) {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalCharacters / charactersPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const pageNumbers = Array.from({
+    length: Math.ceil(totalCharacters / charactersPerPage),
+  }).map((_, i) => i);
 
   return (
     <ul className="pagination">
-      <button onClick={prevPage} className="button-prev-page">
+      <button onClick={() => prevPage()} className="button-prev-page">
         <img src={arrowLeft} alt="arrow-left" />
       </button>
       {pageNumbers.map((number) => (
@@ -29,7 +28,7 @@ function Pagination({
         </li>
       ))}
 
-      <button onClick={nextPage} className="button-next-page">
+      <button onClick={() => nextPage()} className="button-next-page">
         <img src={arrowRight} alt="arrow-right" />
       </button>
     </ul>

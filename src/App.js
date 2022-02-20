@@ -13,7 +13,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(40);
   const [charactersPerPage, setCharactersPerPage] = useState(20);
   const [openedModal, setOpenedModal] = useState(false);
   const [textModal, setTextModal] = useState("");
@@ -23,33 +23,37 @@ function App() {
         const { data } = await axios.get(
           `https://rickandmortyapi.com/api/character/?page=${currentPage}`
         );
+        console.log(currentPage);
+
+        console.log(data.results);
+        // console.log(data.info);
 
         setCharacters(data.results);
         setInfo(data.info);
-
-        setLoading(false);
       } catch (error) {
         setTextModal("Ошибка получения персонажей");
         setOpenedModal(true);
       }
+      setLoading(false);
     }
     getCharacters();
   }, []);
 
-  const lastItemIndex = currentPage * charactersPerPage;
-  const firstItemIndex = lastItemIndex - charactersPerPage;
-  const currentCharacters = characters.slice(firstItemIndex, lastItemIndex);
+  // const lastItemIndex = currentPage * charactersPerPage;
+  // const firstItemIndex = lastItemIndex - charactersPerPage;
+  // const currentCharacters = characters.slice(firstItemIndex, lastItemIndex);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
+      console.log("-");
     }
   };
   const nextPage = () => {
     if (currentPage < info.pages) {
       setCurrentPage((prev) => prev + 1);
+      console.log("+");
     }
   };
   return (
@@ -69,11 +73,13 @@ function App() {
               path="/characters"
               element={
                 <Characters
-                  characters={currentCharacters}
+                  characters={characters} // currentCharacters
                   loading={loading}
                   totalCharacters={info.count}
                   charactersPerPage={charactersPerPage}
-                  paginate={paginate}
+                  setCharactersPerPage={setCharactersPerPage}
+                  // paginate={paginate}
+                  setCurrentPage={setCurrentPage}
                   prevPage={prevPage}
                   nextPage={nextPage}
                 />
