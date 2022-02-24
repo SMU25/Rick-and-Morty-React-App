@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
@@ -8,10 +8,9 @@ function Characters({
   loading,
   prevPage,
   nextPage,
-  totalCharacters,
-  charactersPerPage,
-  setCharactersPerPage,
-  paginate,
+  // activeButtonPrev,
+  // activeButtonNext,
+  totalPages,
   setCurrentPage,
 }) {
   const renderCharacters = () => {
@@ -19,54 +18,19 @@ function Characters({
       <Card key={index} id={index} loading={loading} {...item} />
     ));
   };
-  const [active, setActive] = useState(false);
 
   return (
     <div className="characters">
       <div className="characters__items">{renderCharacters()}</div>
       <div className="characters__pagination">
         <Pagination
-          totalCharacters={totalCharacters}
-          charactersPerPage={charactersPerPage}
           prevPage={prevPage}
           nextPage={nextPage}
-          paginate={paginate}
+          // activeButtonPrev={activeButtonPrev}
+          // activeButtonNext={activeButtonNext}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
         />
-        <ul className="characters__select">
-          <div
-            className="characters__select-header"
-            onClick={() => {
-              setActive(!active);
-            }}
-          >
-            <div
-              className="characters__select-current"
-              value={charactersPerPage}
-            >
-              {charactersPerPage}
-            </div>
-          </div>
-          <div
-            className={`characters__select-body ${
-              active ? "characters__select-body--active" : ""
-            }`}
-          >
-            <li
-              className="characters__select-number"
-              onClick={() => setCharactersPerPage(10)}
-              value={10}
-            >
-              10
-            </li>
-            <li
-              className="characters__select-number"
-              onClick={() => setCharactersPerPage(10)}
-              value={20}
-            >
-              20
-            </li>
-          </div>
-        </ul>
       </div>
     </div>
   );

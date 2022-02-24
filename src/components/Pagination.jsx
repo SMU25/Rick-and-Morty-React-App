@@ -2,27 +2,36 @@ import arrowLeft from "../assets/img/arrow-left.svg";
 import arrowRight from "../assets/img/arrow-right.svg";
 
 function Pagination({
-  totalCharacters,
-  charactersPerPage,
-  paginate,
-
   prevPage,
   nextPage,
+  // activeButtonPrev,
+  // activeButtonNext,
+  totalPages,
+  setCurrentPage,
 }) {
   const pageNumbers = Array.from({
-    length: Math.ceil(totalCharacters / charactersPerPage),
-  }).map((_, i) => i);
+    length: totalPages,
+  }).map((_, i) => i + 1);
+
+  // const setClassNameDisable = (currentClassName) =>
+  //   `${currentClassName} active-button`;
 
   return (
     <ul className="pagination">
-      <button onClick={() => prevPage()} className="button-prev-page">
+      <button
+        onClick={() => prevPage()}
+        className="button-prev-page"
+        // className={
+        //   activeButtonPrev ? setClassNameDisable("button-prev-page") : ""
+        // }
+      >
         <img src={arrowLeft} alt="arrow-left" />
       </button>
       {pageNumbers.map((number) => (
         <li
           className="pagination__page-number"
           key={number}
-          onClick={() => paginate(number)}
+          onClick={() => setCurrentPage(number)}
         >
           {number}
         </li>

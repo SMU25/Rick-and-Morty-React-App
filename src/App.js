@@ -10,23 +10,25 @@ import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 
 function App() {
+  const API = axios.create({
+    method: "GET",
+    baseURL: "https://rickandmortyapi.com/api/",
+  });
+
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(40);
-  const [charactersPerPage, setCharactersPerPage] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
   const [openedModal, setOpenedModal] = useState(false);
   const [textModal, setTextModal] = useState("");
+
+  // const [activeButtonPrev, setActiveButtonPrev] = useState(true);
+  // const [activeButtonNext, setActiveButtonNext] = useState(true);
+
   useEffect(() => {
     async function getCharacters() {
       try {
-        const { data } = await axios.get(
-          `https://rickandmortyapi.com/api/character/?page=${currentPage}`
-        );
-        console.log(currentPage);
-
-        console.log(data.results);
-        // console.log(data.info);
+        const { data } = await API("character/?page=" + currentPage);
 
         setCharacters(data.results);
         setInfo(data.info);
@@ -37,31 +39,26 @@ function App() {
       setLoading(false);
     }
     getCharacters();
-  }, []);
-
-  // const lastItemIndex = currentPage * charactersPerPage;
-  // const firstItemIndex = lastItemIndex - charactersPerPage;
-  // const currentCharacters = characters.slice(firstItemIndex, lastItemIndex);
-
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  }, [currentPage]);
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
-      console.log("-");
+      // setActiveButtonPrev((prev) => !prev);
     }
   };
   const nextPage = () => {
     if (currentPage < info.pages) {
       setCurrentPage((prev) => prev + 1);
-      console.log("+");
+      // setActiveButtonNext((prev) => !prev);
     }
   };
+
   return (
     <div className="container">
       <ModalWindow
         opened={openedModal}
+        onClose={setOpenedModal}
         text={textModal}
-        setOpenedModal={setOpenedModal}
       />
       <Header />
       <div className="wrapper">
@@ -73,15 +70,14 @@ function App() {
               path="/characters"
               element={
                 <Characters
-                  characters={characters} // currentCharacters
+                  characters={characters}
                   loading={loading}
-                  totalCharacters={info.count}
-                  charactersPerPage={charactersPerPage}
-                  setCharactersPerPage={setCharactersPerPage}
-                  // paginate={paginate}
-                  setCurrentPage={setCurrentPage}
                   prevPage={prevPage}
                   nextPage={nextPage}
+                  // activeButtonPrev={activeButtonPrev}
+                  // activeButtonNext={activeButtonNext}
+                  totalPages={info.pages}
+                  setCurrentPage={setCurrentPage}
                 />
               }
               exact
