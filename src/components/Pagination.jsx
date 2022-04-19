@@ -27,15 +27,17 @@ function Pagination({
       >
         <img src={arrowLeft} alt="arrow-left" />
       </button>
-      {pageNumbers.map((number) => (
-        <li
-          className="pagination__page-number"
-          key={number}
-          onClick={() => setCurrentPage(number)}
-        >
-          {number}
-        </li>
-      ))}
+      {pageNumbers
+        //.filter((number) => number) pagination ...
+        .map((number) => (
+          <li
+            className="pagination__page-number"
+            key={number}
+            onClick={() => setCurrentPage(number)}
+          >
+            {number}
+          </li>
+        ))}
 
       <button onClick={() => nextPage()} className="button-next-page">
         <img src={arrowRight} alt="arrow-right" />
