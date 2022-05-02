@@ -1,6 +1,5 @@
 const initialState = {
   items: [],
-  isLoaded: false,
 };
 
 export const characters = (state = initialState, action) => {

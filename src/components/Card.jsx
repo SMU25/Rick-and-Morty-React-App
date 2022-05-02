@@ -1,4 +1,4 @@
-// import ContentLoader from "react-content-loader";
+import ContentLoader from "react-content-loader";
 
 function Card({ name, status, species, image, loading }) {
   const titleImg = `
@@ -8,8 +8,7 @@ function Card({ name, status, species, image, loading }) {
   return (
     <div className="characters__item">
       {loading ? (
-        {
-          /* <ContentLoader
+        <ContentLoader
           speed={2}
           width={222}
           height={346.8}
@@ -21,8 +20,7 @@ function Card({ name, status, species, image, loading }) {
           <rect x="76" y="264" rx="0" ry="0" width="70" height="19" />
           <rect x="40" y="232" rx="0" ry="0" width="142" height="22" />
           <rect x="61" y="294" rx="0" ry="0" width="100" height="19" />
-        </ContentLoader> */
-        }
+        </ContentLoader>
       ) : (
         <>
           <img

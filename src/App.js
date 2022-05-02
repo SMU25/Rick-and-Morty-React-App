@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-import Header from "./components/Header/Header";
-import Menu from "./components/Menu/Menu";
-import ModalWindow from "./components/ModalWindow";
+import Header from "components/Header/Header";
+import Menu from "components/Menu/Menu";
+import ModalWindow from "components/ModalWindow";
+import { setCharacters } from "redux/actions/characters";
+import { setPages } from "redux/actions/pages";
 
-import Home from "./pages/Home";
-import Characters from "./pages/Characters";
+import Home from "pages/Home";
+import Characters from "pages/Characters";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const { currentPage } = useSelector(({ pages, currentPage }) => currentPage);
+
   const API = axios.create({
     method: "GET",
     baseURL: "https://rickandmortyapi.com/api/",
   });
 
-  const [characters, setCharacters] = useState([]);
-  const [info, setInfo] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setLoading] = useState(true);
   const [openedModal, setOpenedModal] = useState(false);
   const [textModal, setTextModal] = useState("");
-
-  // const [activeButtonPrev, setActiveButtonPrev] = useState(true);
-  // const [activeButtonNext, setActiveButtonNext] = useState(true);
 
   useEffect(() => {
     async function getCharacters() {
       try {
         const { data } = await API("character/?page=" + currentPage);
-
-        setCharacters(data.results);
-        setInfo(data.info);
+        dispatch(setCharacters(data.results));
+        dispatch(setPages(data.info.pages));
       } catch (error) {
         setTextModal("Ошибка получения персонажей");
         setOpenedModal(true);
@@ -39,19 +39,8 @@ function App() {
       setLoading(false);
     }
     getCharacters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-      // setActiveButtonPrev((prev) => !prev);
-    }
-  };
-  const nextPage = () => {
-    if (currentPage < info.pages) {
-      setCurrentPage((prev) => prev + 1);
-      // setActiveButtonNext((prev) => !prev);
-    }
-  };
 
   return (
     <div className="container">
@@ -65,23 +54,12 @@ function App() {
         <Menu />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Home />} exact></Route>
+            <Route path="/" element={<Home />} exact />
             <Route
               path="/characters"
-              element={
-                <Characters
-                  characters={characters}
-                  loading={loading}
-                  prevPage={prevPage}
-                  nextPage={nextPage}
-                  // activeButtonPrev={activeButtonPrev}
-                  // activeButtonNext={activeButtonNext}
-                  totalPages={info.pages}
-                  setCurrentPage={setCurrentPage}
-                />
-              }
+              element={<Characters isLoading={isLoading} />}
               exact
-            ></Route>
+            />
           </Routes>
         </div>
       </div>

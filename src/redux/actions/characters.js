@@ -1,4 +1,4 @@
-const setPizzaItems = (items) => ({
+export const setCharacters = (characters) => ({
   type: "SET_CHARACTERS",
-  payload: items,
+  payload: characters,
 });
