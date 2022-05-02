@@ -1,23 +1,26 @@
 .menu {
-  width: 25%;
+  position: fixed;
+  left: 0;
+  width: 30%;
   height: 90vh;
   background-color: rgba(87, 87, 87, 0.137);
-  left: 0;
 
-  &List {
-    margin: 20px 0 0 30px;
-  }
-  &Item {
-    margin-bottom: 10px;
+  &__list {
+    margin: 30px 50px 0 30px;
 
-    a {
-      font-size: 24px;
-      color: rgb(78, 76, 76);
-      font-weight: 500;
+    &-item {
+      margin-bottom: 10px;
+      overflow: hidden;
 
-      &:hover {
-        color: #000;
-        font-weight: 600;
+      a {
+        font-size: 24px;
+        color: rgb(78, 76, 76);
+        font-weight: 500;
+
+        &:hover {
+          color: #000;
+          font-weight: 600;
+        }
       }
     }
   }

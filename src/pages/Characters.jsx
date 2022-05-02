@@ -1,46 +1,28 @@
-function Chatacters() {
+import React from "react";
+import { useSelector } from "react-redux";
+
+import Card from "../components/Card";
+import Pagination from "../components/Pagination";
+
+function Characters({ isLoading }) {
+  const { characters } = useSelector(({ characters }) => {
+    return { characters: characters.items };
+  });
+
+  const renderCharacters = () => {
+    return (isLoading ? [...Array(20)] : characters).map((item, index) => (
+      <Card key={index} id={index} loading={isLoading} {...item} />
+    ));
+  };
+
   return (
     <div className="characters">
-      <div className="items">
-        <div className="item">
-          <img className="itemImgProfile" src="./" alt="img" />
-          <div className="itemInfo">
-            <h3 className="itemName">Pidor</h3>
-            <div className="itemStatus">Loh</div>
-            <div className="itemSpecie">M</div>
-          </div>
-        </div>
-
-        <div className="item">
-          <img className="itemImgProfile" src="./" alt="img" />
-          <div className="itemInfo">
-            <h3 className="itemName">Pidor</h3>
-            <div className="itemStatus">Loh</div>
-            <div className="itemSpecie">M</div>
-          </div>
-        </div>
-
-        <div className="item">
-          <img className="itemImgProfile" src="./" alt="img" />
-          <div className="itemInfo">
-            <h3 className="itemName">Pidor</h3>
-            <div className="itemStatus">Loh</div>
-            <div className="itemSpecie">M</div>
-          </div>
-        </div>
-
-        <div className="item">
-          <img className="itemImgProfile" src="./" alt="img" />
-          <div className="itemInfo">
-            <h3 className="itemName">Pidor</h3>
-            <div className="itemStatus">Loh</div>
-            <div className="itemSpecie">M</div>
-          </div>
-        </div>
+      <div className="characters__items">{renderCharacters()}</div>
+      <div className="characters__pagination">
+        <Pagination />
       </div>
-      <div className="pagination"></div>
     </div>
   );
 }
 
-export default Chatacters;
+export default Characters;

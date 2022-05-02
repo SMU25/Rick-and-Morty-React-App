@@ -10,10 +10,9 @@ function Header() {
       <Link to="/">
         <img className={style.logo} src={logo} alt="Logo" />
       </Link>
-
-      <p className={` ${style.headerAuthorName}`}>
+      <author className={` ${style.header__author}`}>
         <a href="https://github.com/SMU25">Oleksandr Myronchuk</a>
-      </p>
+      </author>
     </header>
   );
 }
